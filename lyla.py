@@ -1,5 +1,4 @@
 #IMPORT REQUIRED DEPENDENCIES
-from email import message
 import discord
 from discord.ext import commands
 from discord import FFmpegPCMAudio
@@ -8,7 +7,6 @@ from discord.ext.commands import has_permissions
 from discord.ext.commands import MissingPermissions
 import requests
 import json
-import aiohttp
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -62,7 +60,7 @@ async def bread(ctx):
 
 
 
-#LIST OFF COMMANDS
+#LIST OF COMMANDS
 @client.command()
 async def list(ctx):
     helpmessage = """Here are my available commands:
@@ -110,7 +108,7 @@ async def on_member_remove(member):
     await channel.send("Goodbye, <@" + str(member.id) + ">! Have a lovely day!")
 
 
-#TRIGGERS TO SPECIFIC WORDS
+#TRIGGERS TO SPECIFIC WORDS, PHRASES, AND ROLES
 @client.event
 async def on_message(message):
     if message.author == client.user:
@@ -121,8 +119,6 @@ async def on_message(message):
         await message.add_reaction(emoji)
 
 
-    if "french" in message.content.casefold():
-        await message.channel.send("Did you mean fr*nch? Fuck france! _You're welcome, Bruce_")
 
     if "nevermind" in message.content.casefold():
         await message.channel.send("Okay!")
@@ -135,9 +131,6 @@ async def on_message(message):
 
 
 
-    for role in message.role_mentions:
-        if role.name.casefold() == "rivalers":
-            await message.channel.send("It's time to fight! SPYDERS ASSEMBLE!")
     
     for role in message.role_mentions:
         if role.name.casefold() == "spyders":
@@ -268,3 +261,4 @@ async def unban_error(ctx, error):
 
 
 client.run(LYLAToken)
+
